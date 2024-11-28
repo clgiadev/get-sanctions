@@ -37,7 +37,6 @@ main {
 
 footer {
   grid-row: 3 / 4;
-  background-color: chocolate;
 }
 
 /*
@@ -48,10 +47,10 @@ footer {
 
 header {
   grid-row: 1 / 2;
-  background-color: aqua;
+  background-color: #116466;
   display: grid;
-  grid-template-columns: 1fr 1200px;
-  grid-template-areas: "alias-lh alias-rh";
+  grid-template-columns: 1fr 700px 1fr;
+  grid-template-areas: "alias-lh . alias-rh";
 }
 
 .left-header {
@@ -62,11 +61,32 @@ header {
   align-items: center;
 }
 
-/* .right-header {
+.left-header i {
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+.right-header {
   grid-area: alias-rh;
   display: flex;
   align-items: center;
-} */
+}
+
+.right-header i {
+  margin-right: 20px;
+  font-size: 1.2rem;
+}
+
+.right-header i:hover, img:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.right-header img, a {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 
 /*
 ======================================
@@ -76,7 +96,8 @@ header {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1200px;
+  grid-template-columns: 1fr 700px 1fr;
+  background-color: #2C3531;
 }
 
 menu {
@@ -84,26 +105,43 @@ menu {
   justify-self: end;
   display: flex;
   flex-direction: column;
-  height: 20px;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 2px solid rgba(0, 0, 0, 0.3);
+  padding-right: 10px;
 }
-
-.input-container input {
-  padding: 10px;
+input {
+  padding: 5px 40px;
   border: 1px solid black;
   border-radius: 10px;
 }
 
-.input-container input:hover {
-  cursor: pointer;
-}
-
-menu > * {
-  margin-top: 10px;
+ input:hover {
+  cursor: text;
 }
 
 menu p {
+  margin: 20px 0 0 0;
+  padding: 0;
   font-weight: 200;
+  font-size: 1.3rem;
+  color: #D1E8E2;
+}
+
+menu * {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+menu button {
+  background-color: #116466;
+  border-radius: 30px;
+  padding: 5px;
+  color: #D1E8E2;
+  font-family: 'Roboto';
+}
+
+menu button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 /*
@@ -113,5 +151,60 @@ menu p {
 */
 
 .result {
-  grid-column: 2 / 3;
+  grid-column: 2/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #D1E8E2;
+}
+
+.result h2 {
+  margin: 20px 0 0 0;
+}
+
+.result #sanction {
+  margin: 10px 20px;  
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/*
+======================================
+===========FOOTER=============
+======================================
+*/
+footer {
+  display: grid;
+  font-size: 0.9rem;
+  grid-template-columns: 1fr 700px 1fr;
+  grid-template-rows: 1fr;
+}
+
+footer a {
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+footer a:hover {
+  cursor: pointer;
+}
+
+.footer-r {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 2/4;
+  background-color: #D9B08C;
+  width: 100%;
+  height: 100%;
+}
+
+
+.footer-l {
+  background-color: #2C3531;
+  grid-column: 1 / 2;
+  width: 100%;
+  height: 100%;
 }

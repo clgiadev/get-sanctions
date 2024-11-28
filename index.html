@@ -11,25 +11,41 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;700&family=Bebas+Neue&family=Dosis:wght@200..800&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital@0;1&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="outer-grid">
       <header>
-        <div class="left-header">PRIMESAIL</div>
+        <div class="left-header">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h3>IntellInvestigate</h3>
+          
+        </div>
         <div class="right-header">
           <!-- <input id="query-lei" type="text" placeholder="Insert LEI code" /> -->
+          <i class="fa-brands fa-linkedin"><a href="https://it.linkedin.com/in/carmelo-lorenzo-giannusa-2a8a20220"></a></i>
+          <i class="fa-brands fa-github"><a href="https://github.com/clgiadev"></a></i>
+          <a href="https://primesail.it/about/people/"><img src="Icon_black_sails_transparent_background.png" alt=""></a>
         </div>
       </header>
       <main>
         <menu>
-          <p>Sanctions Search</p>
-          <div class="input-container">
+          <p>Sanctions Search:</p>
             <input
               id="query-lei"
               type="text"
-              placeholder="Insert LEI code..."
+              placeholder="Insert Legal Entity Name..."
             />
-          </div>
+            <button onclick="sendRequest()">Go</button>
           <!-- <div class="menu-date">
             <span>FROM: </span>
             <input id="start" type="date" />
@@ -38,9 +54,18 @@
           </div> -->
         </menu>
 
-        <div class="result"></div>
+        <div class="result" id="result">
+          <h2>SANCTIONS'S INFORMATIONS ABOUT: </h2>
+          <p id="sanction"></p>
+        </div>
       </main>
-      <footer></footer>
+      <footer>
+        <div class="footer-l"></div>
+        <div class="footer-r">
+          <p>Created by <a href="#"> Lorenzo</a></p>
+        </div>
+        
+      </footer>
     </div>
     <script src="script.js"></script>
   </body>
