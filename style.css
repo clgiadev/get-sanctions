@@ -1,0 +1,117 @@
+/*
+======================================
+===========SHARED CSS=================
+======================================
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*
+======================================
+===========OUTER GRID STYLE===========
+======================================
+*/
+
+.outer-grid {
+  display: grid;
+  grid-template-rows: 70px 1fr 40px;
+  grid-template-columns: 1fr;
+  height: 100vh;
+}
+
+main {
+  grid-row: 2 / 3;
+  /* background-color: burlywood; */
+}
+
+footer {
+  grid-row: 3 / 4;
+  background-color: chocolate;
+}
+
+/*
+======================================
+===========HEADER=====================
+======================================
+*/
+
+header {
+  grid-row: 1 / 2;
+  background-color: aqua;
+  display: grid;
+  grid-template-columns: 1fr 1200px;
+  grid-template-areas: "alias-lh alias-rh";
+}
+
+.left-header {
+  grid-area: alias-lh;
+  justify-self: end;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* .right-header {
+  grid-area: alias-rh;
+  display: flex;
+  align-items: center;
+} */
+
+/*
+======================================
+===========MAIN=======================
+======================================
+*/
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1200px;
+}
+
+menu {
+  grid-column: 1 / 2;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  height: 20px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.input-container input {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.input-container input:hover {
+  cursor: pointer;
+}
+
+menu > * {
+  margin-top: 10px;
+}
+
+menu p {
+  font-weight: 200;
+}
+
+/*
+======================================
+===========RESULT SECTION=============
+======================================
+*/
+
+.result {
+  grid-column: 2 / 3;
+}
