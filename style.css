@@ -194,6 +194,10 @@ menu button:hover {
   cursor: pointer;
   opacity: 0.7;
 }
+
+.result div::-webkit-scrollbar {
+  display: none;
+}
 /*
 ======================================
 ===========FOOTER=============

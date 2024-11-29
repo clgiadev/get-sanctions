@@ -93,6 +93,8 @@ function getSanctions(arr, company_name) {
         const div = document.createElement("div");
         div.id = "container" + i;
         div.style.overflow = "scroll";
+
+      
         const title_h4 = document.createElement("h4");
         const paragraph = document.createElement("p");
         const span_dot = document.createElement("span");
