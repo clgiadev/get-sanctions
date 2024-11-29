@@ -1,5 +1,3 @@
-require("readmore-js");
-
 async function sendRequest() {
   const text = document.getElementById("query-lei");
 
@@ -25,6 +23,7 @@ async function sendRequest() {
 }
 
 function getSanctions(arr, company_name) {
+  const re = new RegExp(company_name, "i");
   const context = document.getElementById("result");
   const div = document.createElement("div");
   div.className = "paragraph";
@@ -64,7 +63,7 @@ function getSanctions(arr, company_name) {
       const str =
         arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_text")]
           .textContent;
-      if (name === company_name) {
+      if (name.match(re) || str.match(re)) {
         const title_h4 = document.createElement("h4");
         const paragraph = document.createElement("p");
         const span_dot = document.createElement("span");
