@@ -8,7 +8,7 @@ async function sendRequest() {
   
 
   const theUrl =
-    "https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
+    "https://corsproxy.io/?https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
     text.value +
     "&timestamp:[*%20TO%20*]&rows=1000&wt=xml&indent=true";
 
