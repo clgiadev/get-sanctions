@@ -1,5 +1,11 @@
 async function sendRequest() {
+  const elements = document.getElementById('result')
   const text = document.getElementById("query-lei");
+
+  arr = Array.prototype.slice.call(elements.getElementsByTagName('div'));
+  if (arr.length !== 0)
+    arr.forEach((el) => elements.removeChild(el))
+  
 
   const theUrl =
     "https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
@@ -22,11 +28,27 @@ async function sendRequest() {
   };
 }
 
+
+function readMore() {
+
+  const span = document.getElementById('more' + 0);
+  const span_dot = document.getElementById('dot' +0);
+  const button = document.getElementById('button' + 0);
+  if(span.style.display = "none") {
+    span_dot.style.display = "none";
+    span.style.display = "block";
+    button.innerHTML = "Hide content";
+  } else {
+    span.style.display = "none";
+    span_dot.style.display = "block";
+    button.innerHTML = "Hide content";
+  }
+}
+
 function getSanctions(arr, company_name) {
   const re = new RegExp(company_name, "i");
   const context = document.getElementById("result");
-  const div = document.createElement("div");
-  div.className = "paragraph";
+
 
   for (let i = 0; i < arr.length; i++) {
     const arrStr = Array.prototype.slice.call(
@@ -53,21 +75,31 @@ function getSanctions(arr, company_name) {
           ].textContent
         : "";
 
-    if (date >= new Date(2021, 0, 2) && date <= Date.now()) {
+    if (date >= new Date(2012, 0, 2) && date <= Date.now()) {
       const typeSanction =
         arrStr[
           arrStr.findIndex(
             (el) => el.getAttribute("name") === "sn_natureFullName"
           )
         ].textContent;
+
       const str =
         arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_text")]
           .textContent;
+      
+
       if (name.match(re) || str.match(re)) {
+
+        const div = document.createElement("div");
+        div.id = "container" + i;
+        div.style.overflow = "scroll";
         const title_h4 = document.createElement("h4");
         const paragraph = document.createElement("p");
         const span_dot = document.createElement("span");
         const span = document.createElement("span");
+        const button = document.createElement("button");
+        button.id = "button" + i;
+        button.innerHTML = "Read more"
         span_dot.id = "dot" + i;
         span.id = "more" + i;
         span.style.display = "none";
@@ -75,13 +107,30 @@ function getSanctions(arr, company_name) {
         arrStr_content = str.split(" ");
         first_part = arrStr_content.slice(0, 50).join(" ");
         second_part = arrStr_content.slice(50).join(" ");
-
+        
+        span.innerHTML = " " + second_part;
         title_h4.innerHTML = date;
         paragraph.innerHTML = first_part;
         paragraph.appendChild(span_dot);
-        context.appendChild(title_h4);
-        context.appendChild(paragraph);
-        context.appendChild(span);
+        paragraph.appendChild(span);
+        context.appendChild(div);
+        div.appendChild(title_h4);
+        div.appendChild(paragraph);
+        div.appendChild(button);
+        button.addEventListener('click', (event) => {
+          const i = button.id.substring(button.id.length - 1);
+          const span = document.getElementById('more' + i);
+          const span_dot = document.getElementById('dot' + i);
+          if(span.style.display === "none"){
+            span_dot.style.display = "none";
+            span.style.display = "inline";
+            button.innerHTML = "Hide content";
+          } else {
+            span.style.display = "none";
+            span_dot.style.display = "inline";
+            button.innerHTML = "Read more";
+          }
+        })
       }
     }
   }
