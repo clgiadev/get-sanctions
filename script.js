@@ -84,7 +84,7 @@ function getSanctions(arr, company_name) {
 
       if (name.match(re) || str.match(re)) {
         const div = document.createElement("div");
-        div.id = "container" + i;
+        div.id = "container_" + i;
         div.style.overflow = "scroll";
 
         const title_h4 = document.createElement("h4");
