@@ -33,7 +33,6 @@
           <h3>IntellInvestigate</h3>
         </div>
         <div class="right-header">
-          <!-- <input id="query-lei" type="text" placeholder="Insert LEI code" /> -->
           <a
             href="https://it.linkedin.com/in/carmelo-lorenzo-giannusa-2a8a20220"
             target="_blank"
@@ -47,7 +46,7 @@
           /></a>
         </div>
       </header>
-      <main>
+      <div class="left-inner-grid">
         <menu>
           <p>Sanctions Search:</p>
           <input
@@ -56,23 +55,17 @@
             placeholder="Insert Legal Entity Name..."
           />
           <button onclick="sendRequest()">Go</button>
-          <!-- <div class="menu-date">
-            <span>FROM: </span>
-            <input id="start" type="date" />
-            <span>TO </span>
-            <input id="end" type="date" />
-          </div> -->
         </menu>
-
-        <div class="result" id="result">
-          <h2>INFORMATIONS ABOUT SANCTIONS</h2>
-        </div>
-      </main>
+      </div>
+      <div class="right-inner-grid">
+        <main>
+          <div class="result" id="result">
+            <h2>INFORMATIONS ABOUT SANCTIONS</h2>
+          </div>
+        </main>
+      </div>
       <footer>
-        <div class="footer-l"></div>
-        <div class="footer-r">
-          <p>Created by <a href="#"> Lorenzo</a></p>
-        </div>
+        <p>Created by <a href="#"> Lorenzo</a></p>
       </footer>
     </div>
     <script src="script.js"></script>

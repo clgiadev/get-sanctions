@@ -26,33 +26,32 @@ async function sendRequest() {
   };
 }
 
-function readMore() {
-  const span = document.getElementById("more" + 0);
-  const span_dot = document.getElementById("dot" + 0);
-  const button = document.getElementById("button" + 0);
-  if ((span.style.display = "none")) {
-    span_dot.style.display = "none";
-    span.style.display = "block";
-    button.innerHTML = "Hide content";
-  } else {
-    span.style.display = "none";
-    span_dot.style.display = "block";
-    button.innerHTML = "Hide content";
+function appendDiv(arr) {
+  const context = document.getElementById("result");
+  arr_of_Object = [];
+  for (let el of arr) {
+    let obj = { date: new Date(el.childNodes[0].textContent), div: el };
+    arr_of_Object.push(obj);
   }
+
+  arr_of_Object.sort((a, b) => (a.date > b.date ? -1 : 1));
+  arr_of_Object.forEach((el) => context.appendChild(el.div));
 }
 
 function getSanctions(arr, company_name) {
   const re = new RegExp(company_name, "i");
-  const context = document.getElementById("result");
+  let divs = [];
 
   for (let i = 0; i < arr.length; i++) {
     const arrStr = Array.prototype.slice.call(
       arr[i].getElementsByTagName("str")
     );
+
     date_str = String(
       arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_dateStr")]
         .textContent
     ).split("/");
+
     const date = new Date(
       parseInt(date_str[2]),
       parseInt(date_str[1]) - 1,
@@ -70,14 +69,7 @@ function getSanctions(arr, company_name) {
           ].textContent
         : "";
 
-    if (date >= new Date(2012, 0, 2) && date <= Date.now()) {
-      const typeSanction =
-        arrStr[
-          arrStr.findIndex(
-            (el) => el.getAttribute("name") === "sn_natureFullName"
-          )
-        ].textContent;
-
+    if (date >= new Date(2012, 0, 2)) {
       const str =
         arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_text")]
           .textContent;
@@ -85,7 +77,6 @@ function getSanctions(arr, company_name) {
       if (name.match(re) || str.match(re)) {
         const div = document.createElement("div");
         div.id = "container_" + i;
-        div.style.overflow = "scroll";
 
         const title_h4 = document.createElement("h4");
         const paragraph = document.createElement("p");
@@ -107,7 +98,7 @@ function getSanctions(arr, company_name) {
         paragraph.innerHTML = first_part;
         paragraph.appendChild(span_dot);
         paragraph.appendChild(span);
-        context.appendChild(div);
+
         div.appendChild(title_h4);
         div.appendChild(paragraph);
         div.appendChild(button);
@@ -125,7 +116,10 @@ function getSanctions(arr, company_name) {
             button.innerHTML = "Read more";
           }
         });
+        divs.push(div);
       }
     }
   }
+
+  appendDiv(divs);
 }
