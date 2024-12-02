@@ -119,6 +119,7 @@ menu {
   background-color: #2c3531;
 }
 input {
+  background-color: #d1e8e2;
   padding: 5px 40px;
   border: 1px solid black;
   border-radius: 10px;
@@ -152,6 +153,36 @@ menu button:hover {
   cursor: pointer;
   opacity: 0.8;
 }
+
+.nation-choice {
+  display: flex;
+  align-items: flex-end;
+  margin: 10px 0 10px 0;
+  
+}
+
+.nation-choice > p, select {
+  margin: 0 0 0 20px;
+}
+
+.nation-choice p {
+  font-size: 1rem;
+}
+
+.nation-choice select {
+  background-color: #d1e8e2;
+  border: 0;
+  border-radius: 10px;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+}
+
+.nation-choice select:hoverr{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
 
 /*
 ======================================
