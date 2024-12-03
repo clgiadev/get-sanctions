@@ -177,7 +177,7 @@ menu button:hover {
   font-family: "Roboto", sans-serif;
 }
 
-.nation-choice select:hoverr{
+.nation-choice select:hover{
   cursor: pointer;
   opacity: 0.8;
 }

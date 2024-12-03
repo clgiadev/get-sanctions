@@ -10,7 +10,7 @@ async function sendRequest() {
   if (arr.length !== 0) arr.forEach((el) => elements.removeChild(el));
 
   const theUrl =
-    "https://corsproxy.io/?https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
+    "https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
     text.value +
     "&timestamp:[*%20TO%20*]&rows=1000&wt=xml&indent=true";
 
@@ -62,10 +62,12 @@ function getSanctions(arr, company_name) {
   let divs = [];
 
   for (let i = 0; i < arr.length; i++) {
+  
     const arrStr = Array.prototype.slice.call(
       arr[i].getElementsByTagName("str")
     );
 
+  
     date_str = String(
       arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_dateStr")]
         .textContent
@@ -89,9 +91,11 @@ function getSanctions(arr, company_name) {
         : "";
 
     if (date >= new Date(2012, 0, 2)) {
+      
       const str =
+      arrStr.findIndex((el) => el.getAttribute("name") === "sn_text") !== -1 ?
         arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_text")]
-          .textContent;
+          .textContent : "";
 
       if (name.match(re) || str.match(re)) {
         const div = document.createElement("div");
