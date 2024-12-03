@@ -1,6 +1,10 @@
 async function sendRequest() {
   const elements = document.getElementById("result");
   const text = document.getElementById("query-lei");
+  // just a check
+  const geo_area = document.getElementById('nation-choice');
+  const selected_option = geo_area.value;
+
 
   arr = Array.prototype.slice.call(elements.getElementsByTagName("div"));
   if (arr.length !== 0) arr.forEach((el) => elements.removeChild(el));
@@ -10,20 +14,35 @@ async function sendRequest() {
     text.value +
     "&timestamp:[*%20TO%20*]&rows=1000&wt=xml&indent=true";
 
-  const xmlParser = new window.DOMParser();
-
-  const http = new XMLHttpRequest();
-  await http.open("GET", theUrl);
-  await http.send();
-  http.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const document = xmlParser
-        .parseFromString(http.responseText, "text/xml")
-        .getElementsByTagName("doc");
-      const arr = Array.prototype.slice.call(document);
-      getSanctions(arr, text.value);
+  switch (selected_option) {
+    case "UE":  const xmlParser = new window.DOMParser();
+                const http = new XMLHttpRequest();
+                await http.open("GET", theUrl);
+                await http.send();
+                http.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                    const document = xmlParser.parseFromString(http.responseText, "text/xml")
+                                              .getElementsByTagName("doc");
+                    const arr = Array.prototype.slice.call(document);
+                    getSanctions(arr, text.value);
+                  }
+                };
+                break;
+    // case "US":  const path = './enforcementactions.csv';
+    //             fs.createReadStream(path)
+    //               .pipe(parse({delimiter:",", from_line: 1}))
+    //               .on("data", function(row) {
+    //                 console.lot(row);
+    //               })
+    //               .on("error", function (error) {
+    //                 // Handle the errors
+    //                 console.log(error.message);
+    //               })
+    //               .on("end", function () {
+    //                 // executed when parsing is complete
+    //                 console.log("File read successful");
+    //               });
     }
-  };
 }
 
 function appendDiv(arr) {
@@ -80,42 +99,51 @@ function getSanctions(arr, company_name) {
 
         const title_h4 = document.createElement("h4");
         const paragraph = document.createElement("p");
-        const span_dot = document.createElement("span");
-        const span = document.createElement("span");
-        const button = document.createElement("button");
-        button.id = "button_" + i;
-        button.innerHTML = "Read more";
-        span_dot.id = "dot_" + i;
-        span.id = "more_" + i;
-        span.style.display = "none";
-        span_dot.innerHTML = "...";
         arrStr_content = str.split(" ");
         first_part = arrStr_content.slice(0, 50).join(" ");
         second_part = arrStr_content.slice(50).join(" ");
-
-        span.innerHTML = " " + second_part;
         title_h4.innerHTML = date;
-        paragraph.innerHTML = first_part;
-        paragraph.appendChild(span_dot);
-        paragraph.appendChild(span);
-
-        div.appendChild(title_h4);
-        div.appendChild(paragraph);
-        div.appendChild(button);
-        button.addEventListener("click", (event) => {
-          const i = button.id.split("_")[1];
-          const span = document.getElementById("more_" + i);
-          const span_dot = document.getElementById("dot_" + i);
-          if (span.style.display === "none") {
-            span_dot.style.display = "none";
-            span.style.display = "inline";
-            button.innerHTML = "Hide content";
-          } else {
-            span.style.display = "none";
-            span_dot.style.display = "inline";
-            button.innerHTML = "Read more";
-          }
-        });
+        if(second_part.length  > 10) {
+          const span_dot = document.createElement("span");
+          const span = document.createElement("span");
+          const button = document.createElement("button");
+          button.id = "button_" + i;
+          button.innerHTML = "Read more";
+          span_dot.id = "dot_" + i;
+          span.id = "more_" + i;
+          span.style.display = "none";
+          span_dot.innerHTML = "...";
+      
+  
+          span.innerHTML = " " + second_part;
+          
+          paragraph.innerHTML = first_part;
+          paragraph.appendChild(span_dot);
+          paragraph.appendChild(span);
+  
+          div.appendChild(title_h4);
+          div.appendChild(paragraph);
+          div.appendChild(button);
+          button.addEventListener("click", (event) => {
+            const i = button.id.split("_")[1];
+            const span = document.getElementById("more_" + i);
+            const span_dot = document.getElementById("dot_" + i);
+            if (span.style.display === "none") {
+              span_dot.style.display = "none";
+              span.style.display = "inline";
+              button.innerHTML = "Hide content";
+            } else {
+              span.style.display = "none";
+              span_dot.style.display = "inline";
+              button.innerHTML = "Read more";
+            }
+          });
+        } else {
+          paragraph.innerHTML = first_part + " " + second_part;
+          div.appendChild(title_h4);
+          div.appendChild(paragraph);
+        }
+       
         divs.push(div);
       }
     }
