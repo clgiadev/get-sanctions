@@ -1,3 +1,27 @@
+
+
+ function readCSV () {
+
+  return reader =  fetch('./enforcementactions.csv')
+                  .then((response) => response.text())
+                  .then((text) => text)
+                  .catch((e) => console.log(e));
+
+ 
+}
+
+function getMatrix(arr) {
+  let matrix = []
+  for (el of arr) matrix.push(el.split(","));
+  
+  return matrix;
+}
+
+
+
+                  
+
+
 async function sendRequest() {
   const elements = document.getElementById("result");
   const text = document.getElementById("query-lei");
@@ -27,21 +51,12 @@ async function sendRequest() {
                   }
                 };
                 break;
-    // case "US":  const path = './enforcementactions.csv';
-    //             fs.createReadStream(path)
-    //               .pipe(parse({delimiter:",", from_line: 1}))
-    //               .on("data", function(row) {
-    //                 console.lot(row);
-    //               })
-    //               .on("error", function (error) {
-    //                 // Handle the errors
-    //                 console.log(error.message);
-    //               })
-    //               .on("end", function () {
-    //                 // executed when parsing is complete
-    //                 console.log("File read successful");
-    //               });
-    }
+    case "US":  const arrCSV = (await readCSV()).split("\r");
+                const matrCSV = getMatrix(arrCSV);
+                console.log(matrCSV[0][0])
+                
+                break;
+  }
 }
 
 function appendDiv(arr) {
