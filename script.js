@@ -5,7 +5,6 @@ async function sendRequest() {
   const geo_area = document.getElementById('nation-choice');
   const selected_option = geo_area.value;
 
-
   arr = Array.prototype.slice.call(elements.getElementsByTagName("div"));
   if (arr.length !== 0) arr.forEach((el) => elements.removeChild(el));
 
@@ -59,6 +58,9 @@ function appendDiv(arr) {
 
 function getSanctions(arr, company_name) {
   const re = new RegExp(company_name, "i");
+  const lenght_80 = Math.floor(company_name.length * 0.8);
+  const company_name_80 = company_name.substring(0, lenght_80);
+  const re_80 = new RegExp(company_name_80, "i");
   let divs = [];
 
   for (let i = 0; i < arr.length; i++) {
@@ -96,14 +98,36 @@ function getSanctions(arr, company_name) {
       arrStr.findIndex((el) => el.getAttribute("name") === "sn_text") !== -1 ?
         arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_text")]
           .textContent : "";
+      
 
-      if (name.match(re) || str.match(re)) {
+      const str_translated =
+      arrStr.findIndex((el) => el.getAttribute("name") === "sn_translatedText") !== -1 ?
+        arrStr[arrStr.findIndex((el) => el.getAttribute("name") === "sn_translatedText")]
+          .textContent : "";
+
+      /*=======================================================================
+        ==== CHECK IF EXISTS A LONG MATCH BETWEEN NAME AND SANCTION'S TEXT ====
+        =======================================================================
+      */
+
+      // const matcher_transl = new difflib.SequenceMatcher(null, company_name.toLowerCase(), str_translated.toLowerCase());
+      // const longest_match_transl = difflib.getCloseMatches(company_name.toLowerCase(), str.toLowerCase());
+      // console.log(longest_match_transl);
+      // if(longest_match_transl !== no_match && (longest_match_transl[2] - longest_match_transl[1]) >= company_name.length - 5 && longest_match_transl[0] === 0)
+      //   console.log(str_translated.substring(longest_match_transl[1], longest_match_transl[1] + longest_match_transl[2]));
+      // console.log(str_translated.substring(longest_match_transl[1], longest_match_transl[1] + longest_match_transl[2]));
+      // console.log(str_translated.substring(longest_match_transl[1]));
+     
+      
+  
+      if (name.match(re) || str.match(re) || str_translated.match(re) || str.match(re_80) || str_translated.match(re_80)) {
+      
         const div = document.createElement("div");
         div.id = "container_" + i;
 
         const title_h4 = document.createElement("h4");
         const paragraph = document.createElement("p");
-        arrStr_content = str.split(" ");
+        str_translated.length !== 0 ? arrStr_content = str_translated.split(" ") : arrStr_content = str.split(" ");
         first_part = arrStr_content.slice(0, 50).join(" ");
         second_part = arrStr_content.slice(50).join(" ");
         title_h4.innerHTML = date;

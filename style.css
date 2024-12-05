@@ -213,11 +213,14 @@ main::-webkit-scrollbar {
   align-items: center;
 }
 
+.result div {
+  width: 80%;
+}
+
 .result p {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
-  margin: 20px 10%;
 }
 .result * {
   margin: 20px 10%;
