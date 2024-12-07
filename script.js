@@ -43,8 +43,6 @@ async function sendRequest() {
               el.toLowerCase().includes(text.value.toLowerCase())
             )
           : [];
-      console.log(text.value);
-      console.log(arrCompany);
       getSanctions(arrCompany, text.value, geo_area.value);
 
       break;
@@ -207,7 +205,6 @@ function getSanctions(arr, company_name, geo_area) {
     const regex_2 = new RegExp(/\/(.+htm)/);
     const regex_3 = new RegExp(/\/(.+pdf)/);
     for (let i = 0; i < arr.length; i++) {
-      console.log(arr);
       const temp_Str = arr[i].match(regex_1) ? arr[i].match(regex_1) : [];
       const temp_Str_2 = arr[i].match(regex_2)
         ? arr[i].match(regex_2)
@@ -252,7 +249,6 @@ function getSanctions(arr, company_name, geo_area) {
 
       div.appendChild(title_h4);
       div.appendChild(paragraph);
-      console.log(temp_Str_2);
       if (temp_Str_2.length !== 0) {
         const p_link = document.createElement("p");
         const link = document.createElement("a");
