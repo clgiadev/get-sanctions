@@ -43,7 +43,6 @@ async function sendRequest() {
               el.toLowerCase().includes(text.value.toLowerCase())
             )
           : [];
-      console.log(arrCompany);
       getSanctions(arrCompany, text.value, geo_area.value);
 
       break;
@@ -204,10 +203,15 @@ function getSanctions(arr, company_name, geo_area) {
     if (arr.length === 0) return;
     const regex_1 = new RegExp(/"[^"]+"/g);
     const regex_2 = new RegExp(/\/(.+htm)/);
+    const regex_3 = new RegExp(/\/(.+pdf)/);
     for (let i = 0; i < arr.length; i++) {
-      console.log(i);
-      const temp_Str = arr[i].match(regex_1);
-      const temp_Str_2 = arr[i].match(regex_2);
+      const temp_Str = arr[i].match(regex_1) ? arr[i].match(regex_1) : [];
+      const temp_Str_2 = arr[i].match(regex_2)
+        ? arr[i].match(regex_2)
+        : arr[i].match(regex_3)
+        ? arr[i].match(regex_3)
+        : [];
+
       const info_company = arr[i].split(",");
       const div = document.createElement("div");
       const title_h4 = document.createElement("h4");
@@ -217,7 +221,13 @@ function getSanctions(arr, company_name, geo_area) {
 
       span_company.style.color = "#116466";
       span_company.innerText =
-        temp_Str.length !== 0 ? temp_Str[0].replaceAll('"', "") : "";
+        temp_Str.length !== 0
+          ? temp_Str[0].replaceAll('"', "")
+          : info_company[2].length !== 0
+          ? info_company[2] + " " + info_company[3] + " " + info_company[4]
+          : info_company[3].length !== 0
+          ? info_company[3] + " " + info_company[4]
+          : info_company[4];
 
       title_h4.innerHTML =
         "Start Date:   " +
@@ -239,11 +249,13 @@ function getSanctions(arr, company_name, geo_area) {
 
       div.appendChild(title_h4);
       div.appendChild(paragraph);
-
+      console.log(temp_Str_2);
       if (temp_Str_2.length !== 0) {
         const p_link = document.createElement("p");
         const link = document.createElement("a");
-        link.href = "https://www.federalreserve.gov/" + temp_Str_2[0];
+        link.href =
+          "https://www.federalreserve.gov/" +
+          temp_Str_2[0].replace(/\/\/www.federalreserve.gov\//, "");
         link.innerHTML = "More info about";
         link.target = "_blank";
         p_link.appendChild(link);
