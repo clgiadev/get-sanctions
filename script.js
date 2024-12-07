@@ -15,13 +15,12 @@ async function sendRequest() {
   arr = Array.prototype.slice.call(elements.getElementsByTagName("div"));
   if (arr.length !== 0) arr.forEach((el) => elements.removeChild(el));
 
-  const theUrl =
-    "https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
-    text.value +
-    "&timestamp:[*%20TO%20*]&rows=1000&wt=xml&indent=true";
-
   switch (selected_option) {
     case "UE":
+      const theUrl =
+        "https://registers.esma.europa.eu/solr/esma_registers_sanctions/select?q=" +
+        text.value +
+        "&timestamp:[*%20TO%20*]&rows=1000&wt=xml&indent=true";
       const xmlParser = new window.DOMParser();
       const http = new XMLHttpRequest();
       await http.open("GET", theUrl);
@@ -44,9 +43,7 @@ async function sendRequest() {
               el.toLowerCase().includes(text.value.toLowerCase())
             )
           : [];
-      arrCompany.length !== 0
-        ? getSanctions(arrCompany, text.value, geo_area.value)
-        : getSanctions(null, text.value, geo_area.value);
+      getSanctions(arrCompany, text.value, geo_area.value);
 
       break;
   }
@@ -203,10 +200,11 @@ function getSanctions(arr, company_name, geo_area) {
       }
     }
   } else if (geo_area === "US") {
-    if (arr === null) return;
+    if (arr.length === 0) return;
     const regex_1 = new RegExp(/"[^"]+"/g);
     const regex_2 = new RegExp(/\/(.+htm)/);
     for (let i = 0; i < arr.length; i++) {
+      console.log(i);
       const temp_Str = arr[i].match(regex_1);
       const temp_Str_2 = arr[i].match(regex_2);
       const info_company = arr[i].split(",");
