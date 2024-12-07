@@ -43,6 +43,7 @@ async function sendRequest() {
               el.toLowerCase().includes(text.value.toLowerCase())
             )
           : [];
+      console.log(text.value);
       console.log(arrCompany);
       getSanctions(arrCompany, text.value, geo_area.value);
 
