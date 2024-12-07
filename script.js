@@ -203,6 +203,7 @@ function getSanctions(arr, company_name, geo_area) {
       }
     }
   } else if (geo_area === "US") {
+    if (arr === null) return;
     const regex_1 = new RegExp(/"[^"]+"/g);
     const regex_2 = new RegExp(/\/(.+htm)/);
     for (let i = 0; i < arr.length; i++) {
