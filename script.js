@@ -70,13 +70,12 @@ function appendDiv(arr, geo_area) {
 }
 
 function getSanctions(arr, company_name, geo_area) {
-  const re = new RegExp(company_name, "i");
-  const lenght_80 = Math.floor(company_name.length * 0.8);
-  const company_name_80 = company_name.substring(0, lenght_80);
-  const re_80 = new RegExp(company_name_80, "i");
-
-  let divs = [];
+  const divs = [];
   if (geo_area === "UE") {
+    const re = new RegExp(company_name, "i");
+    const lenght_80 = Math.floor(company_name.length * 0.8);
+    const company_name_80 = company_name.substring(0, lenght_80);
+    const re_80 = new RegExp(company_name_80, "i");
     for (let i = 0; i < arr.length; i++) {
       const arrStr = Array.prototype.slice.call(
         arr[i].getElementsByTagName("str")
