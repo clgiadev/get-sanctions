@@ -218,6 +218,7 @@ function getSanctions(arr, company_name, geo_area) {
       span_company.style.color = "#116466";
       span_company.innerText =
         temp_Str.length !== 0 ? temp_Str[0].replaceAll('"', "") : "";
+
       title_h4.innerHTML =
         "Start Date:   " +
         info_company[0] +
@@ -226,13 +227,16 @@ function getSanctions(arr, company_name, geo_area) {
           : "   ");
       title_h4.appendChild(span_company);
 
-      span_type.innerText = "Action:   ";
-      console.log(span_type.innerText);
       paragraph.appendChild(span_type);
-      paragraph.innerText =
-        temp_Str.lenght > 1
+      span_type.innerText = "Action:   ";
+      span_type.style.color = "#116466";
+
+      paragraph.innerHTML =
+        paragraph.innerHTML +
+        (temp_Str.length > 1
           ? temp_Str[1].replaceAll('"', "")
-          : arr[i].replace(regex_1, "").split(",")[5];
+          : arr[i].replace(regex_1, "").split(",")[5]);
+
       div.appendChild(title_h4);
       div.appendChild(paragraph);
 
@@ -241,6 +245,7 @@ function getSanctions(arr, company_name, geo_area) {
         const link = document.createElement("a");
         link.href = "https://www.federalreserve.gov/" + temp_Str_2[0];
         link.innerHTML = "More info about";
+        link.target = "_blank";
         p_link.appendChild(link);
         div.appendChild(p_link);
       }
