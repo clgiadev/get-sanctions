@@ -205,6 +205,7 @@ function getSanctions(arr, company_name, geo_area) {
     const regex_2 = new RegExp(/\/(.+htm)/);
     const regex_3 = new RegExp(/\/(.+pdf)/);
     for (let i = 0; i < arr.length; i++) {
+      console.log(arr);
       const temp_Str = arr[i].match(regex_1) ? arr[i].match(regex_1) : [];
       const temp_Str_2 = arr[i].match(regex_2)
         ? arr[i].match(regex_2)
