@@ -36,7 +36,7 @@ async function sendRequest() {
       };
       break;
     case "US":
-      const arrCSV = (await readCSV()).split("\r");
+      const arrCSV = (await readCSV()).split("\n");
       const arrCompany =
         text.value !== ""
           ? arrCSV.filter((el) =>
