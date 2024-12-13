@@ -53,6 +53,7 @@ function appendDiv(arr, geo_area) {
   const context = document.getElementById("result");
   switch (geo_area) {
     case "UE":
+      console.log(arr);
       arr_of_Object = [];
       for (let el of arr) {
         let obj = { date: new Date(el.childNodes[0].textContent), div: el };
@@ -194,7 +195,7 @@ function getSanctions(arr, company_name, geo_area) {
             div.appendChild(paragraph);
           }
 
-          divs.push(div, geo_area);
+          divs.push(div);
         }
       }
     }
